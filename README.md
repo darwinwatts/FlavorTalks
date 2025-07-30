@@ -5,7 +5,7 @@ FlavorTalks is a food discovery web app prototype that combines AI-powered conve
 
 ## Features
 
-- Responsive React + Vite frontend
+- Responsive React + Vite frontend - ok
 - Search bar for food cravings
 - AI chat interface with sample conversational recommendations
 - Filters for budget, vibe, and cultural tags
