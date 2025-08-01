@@ -1,35 +1,541 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FlavorTalks</title>
-    <script defer src="script.js"></script> 
+    <title>FlavorTalks - Cultural Food Discovery</title>
     <link rel="stylesheet" href="styles.css">
-    
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <meta name="description" content="FlavorTalks - Your go-to platform for food discussions and recipes.">
-    <meta name="keywords" content="food, recipes, discussions, cooking, FlavorTalks">
-    <meta name="author" content="FlavorTalks Team">
-    <meta property="og:title" content="FlavorTalks - Food Discussions and Recipes">
-    <meta property="og:description" content="Join FlavorTalks for engaging food discussions and discover new recipes.">
-    <meta property="og:image" content="https://example.com/image.jpg">
-    <meta property="og:url" content="https://example.com/flavortalks">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="FlavorTalks - Food Discussions and Recipes">
-    <meta name="twitter:description" content="Join FlavorTalks for engaging food discussions and discover new recipes.">
-    <meta name="twitter:image" content="https://example.com/image.jpg">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍽️</text></svg>">
 </head>
-
 <body>
-    <h1>Welcome to FlavorTalks</h1>
-    <div id="output"></div>
-    <div id="talks"></div>
-    
-<footer>
-    <p>&copy; 2025 FlavorTalks. All rights reserved.</p>
-    <p>Follow us on <a href="https://twitter.com/flavortalks" target="_blank">Twitter</a> and <a href="https://instagram.com/flavortalks" target="_blank">Instagram</a>.</p>
-</footer>
+    <!-- Auth Page (Initially Hidden) -->
+    <div id="auth-page" class="page">
+        <div class="auth-container">
+            <div class="auth-left">
+                <div class="auth-form">
+                    <h2>Welcome to FlavorTalks</h2>
+                    <form id="auth-form">
+                        <div class="form-group">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-input" placeholder="Enter your email" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Password</label>
+                            <input type="password" class="form-input" placeholder="Enter your password" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 20px;">
+                            Sign In
+                        </button>
+                    </form>
+                    <div style="text-align: center; margin-top: 20px;">
+                        <p>Don't have an account? <a href="#" style="color: var(--primary-orange);">Sign up</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="auth-right">
+                <div class="auth-hero">
+                    <h1>🍽️</h1>
+                    <h1>Discover Flavors</h1>
+                    <p>Connect with your cultural roots through food. Find restaurants that bridge your heritage with new culinary adventures.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+```
+<!-- Main App -->
+<div id="main-app" class="app-container">
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">FlavorTalks</div>
+            <div class="user-info">
+                <div class="user-avatar">👤</div>
+                <div>
+                    <div style="font-weight: 600;">Alex Chen</div>
+                    <div style="font-size: 14px; opacity: 0.8;">Cultural Explorer</div>
+                </div>
+            </div>
+        </div>
+        <nav class="nav-menu">
+            <button class="nav-item active" data-page="chat">
+                <span class="nav-item-icon">💬</span>
+                Chat
+            </button>
+            <button class="nav-item" data-page="discover">
+                <span class="nav-item-icon">🔍</span>
+                Discover
+            </button>
+            <button class="nav-item" data-page="profile">
+                <span class="nav-item-icon">👤</span>
+                Profile
+            </button>
+            <button class="nav-item" data-page="social">
+                <span class="nav-item-icon">👥</span>
+                Food Courts
+            </button>
+            <button class="nav-item" data-page="cultural">
+                <span class="nav-item-icon">🌍</span>
+                Cultural Bridge
+            </button>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <header class="header">
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+            <h1 class="header-title" id="page-title">FlavorTalks Chat</h1>
+            <div class="header-actions">
+                <button class="btn btn-secondary">🔔</button>
+                <button class="btn btn-primary">New Chat</button>
+            </div>
+        </header>
+
+        <div class="content-area">
+            <!-- Chat Page -->
+            <div id="chat" class="page active">
+                <div class="chat-container">
+                    <div class="chat-messages" id="chat-messages">
+                        <!-- Messages will be dynamically added here -->
+                    </div>
+                    <div class="chat-input-area">
+                        <textarea class="chat-input" placeholder="Tell me what you're craving..." rows="1"></textarea>
+                        <button class="send-btn">➤</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Discover Page -->
+            <div id="discover" class="page">
+                <div class="filter-bar">
+                    <div class="filter-item">
+                        <label class="filter-label">Cuisine</label>
+                        <select class="filter-select">
+                            <option>All Cuisines</option>
+                            <option>Chinese</option>
+                            <option>Italian</option>
+                            <option>Mexican</option>
+                            <option>Indian</option>
+                            <option>Thai</option>
+                            <option>Japanese</option>
+                            <option>Korean</option>
+                        </select>
+                    </div>
+                    <div class="filter-item">
+                        <label class="filter-label">Price Range</label>
+                        <select class="filter-select">
+                            <option>Any Price</option>
+                            <option>$ (Under $15)</option>
+                            <option>$$ ($15-30)</option>
+                            <option>$$$ ($30-50)</option>
+                            <option>$$$$ ($50+)</option>
+                        </select>
+                    </div>
+                    <div class="filter-item">
+                        <label class="filter-label">Cultural Match</label>
+                        <select class="filter-select">
+                            <option>Best Match</option>
+                            <option>Authentic</option>
+                            <option>Fusion</option>
+                            <option>Adventure</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-primary">Apply Filters</button>
+                </div>
+
+                <div class="discover-grid">
+                    <div class="restaurant-card" onclick="openRestaurantDetails('Mama Zhou\'s Noodle House')">
+                        <div class="restaurant-image">🍜</div>
+                        <div class="restaurant-info">
+                            <div class="restaurant-name">Mama Zhou's Noodle House</div>
+                            <div class="restaurant-cuisine">Authentic Chinese</div>
+                            <div class="restaurant-rating">
+                                <span class="stars">⭐⭐⭐⭐⭐</span>
+                                <span>4.9 (89 reviews)</span>
+                            </div>
+                            <div class="cultural-context">
+                                <div class="cultural-context-title">🎯 Perfect Match</div>
+                                <div>Hand-pulled noodles just like grandma made. The owner is from your home province!</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="restaurant-card" onclick="openRestaurantDetails('Taco Dynasty')">
+                        <div class="restaurant-image">🌮</div>
+                        <div class="restaurant-info">
+                            <div class="restaurant-name">Taco Dynasty</div>
+                            <div class="restaurant-cuisine">Chinese-Mexican Fusion</div>
+                            <div class="restaurant-rating">
+                                <span class="stars">⭐⭐⭐⭐</span>
+                                <span>4.6 (234 reviews)</span>
+                            </div>
+                            <div class="cultural-context">
+                                <div class="cultural-context-title">🌉 Cultural Adventure</div>
+                                <div>Five-spice carnitas and Peking duck tacos - an unexpected fusion that works perfectly!</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="restaurant-card" onclick="openRestaurantDetails('Chopstick Pizza Co.')">
+                        <div class="restaurant-image">🍕</div>
+                        <div class="restaurant-info">
+                            <div class="restaurant-name">Chopstick Pizza Co.</div>
+                            <div class="restaurant-cuisine">Italian-Chinese Fusion</div>
+                            <div class="restaurant-rating">
+                                <span class="stars">⭐⭐⭐⭐</span>
+                                <span>4.5 (156 reviews)</span>
+                            </div>
+                            <div class="cultural-context">
+                                <div class="cultural-context-title">🎨 Creative Fusion</div>
+                                <div>Char siu pizza and black bean sauce calzones - Italian techniques meet Chinese flavors!</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="restaurant-card" onclick="openRestaurantDetails('Spice Route Kitchen')">
+                        <div class="restaurant-image">🍛</div>
+                        <div class="restaurant-info">
+                            <div class="restaurant-name">Spice Route Kitchen</div>
+                            <div class="restaurant-cuisine">Indian-Chinese Fusion</div>
+                            <div class="restaurant-rating">
+                                <span class="stars">⭐⭐⭐⭐⭐</span>
+                                <span>4.7 (178 reviews)</span>
+                            </div>
+                            <div class="cultural-context">
+                                <div class="cultural-context-title">🌶️ Spice Harmony</div>
+                                <div>Hakka noodles with authentic Indian spices - a perfect blend of your favorite heat levels!</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profile Page -->
+            <div id="profile" class="page">
+                <div class="profile-container">
+                    <div class="profile-header">
+                        <div class="profile-avatar">👤</div>
+                        <div class="profile-info">
+                            <h2>Alex Chen</h2>
+                            <p>Cultural Food Explorer since 2024</p>
+                            <p>🌟 Adventure Level: Culinary Pioneer</p>
+                        </div>
+                    </div>
+
+                    <div class="cultural-dna">
+                        <h3>🧬 Your Cultural DNA</h3>
+                        <div class="cultural-badges">
+                            <span class="cultural-badge">🇨🇳 Chinese (Sichuan)</span>
+                            <span class="cultural-badge">🇺🇸 American</span>
+                            <span class="cultural-badge">🌶️ Spice Lover</span>
+                            <span class="cultural-badge">🥟 Dumpling Expert</span>
+                            <span class="cultural-badge">🍜 Noodle Enthusiast</span>
+                        </div>
+                    </div>
+
+                    <div class="preferences-grid">
+                        <div class="preference-card">
+                            <h4>🍽️ Dietary Preferences</h4>
+                            <div style="margin-top: 10px;">
+                                <div style="margin-bottom: 8px;">✅ Pescatarian</div>
+                                <div style="margin-bottom: 8px;">❌ No Shellfish</div>
+                                <div style="margin-bottom: 8px;">🌶️ High Spice Tolerance</div>
+                                <div style="margin-bottom: 8px;">🥛 Lactose Intolerant</div>
+                            </div>
+                        </div>
+
+                        <div class="preference-card">
+                            <h4>💰 Budget Settings</h4>
+                            <div>
+                                <label style="display: block; margin-bottom: 10px;">Casual Dining: $15-25</label>
+                                <input type="range" class="budget-slider" min="10" max="50" value="20">
+                                <label style="display: block; margin: 15px 0 10px;">Special Occasions: $40-80</label>
+                                <input type="range" class="budget-slider" min="30" max="150" value="60">
+                            </div>
+                        </div>
+
+                        <div class="preference-card">
+                            <h4>🎯 Cultural Exploration</h4>
+                            <div style="margin-top: 10px;">
+                                <div style="margin-bottom: 15px;">
+                                    <strong>Comfort Zone vs Adventure</strong>
+                                    <input type="range" class="budget-slider" min="0" max="100" value="75" style="margin-top: 5px;">
+                                    <div style="display: flex; justify-content: space-between; font-size: 12px; color: var(--text-light);">
+                                        <span>Comfort</span>
+                                        <span>Adventure</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <strong>Discovery Stats:</strong>
+                                    <div>🏆 15 New Cuisines Tried</div>
+                                    <div>🌍 8 Cultural Bridges Built</div>
+                                    <div>⭐ 47 Restaurants Rated</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="preference-card">
+                            <h4>📍 Location Preferences</h4>
+                            <div style="margin-top: 10px;">
+                                <div style="margin-bottom: 8px;">🏠 Home: San Francisco, CA</div>
+                                <div style="margin-bottom: 8px;">💼 Work: Downtown SF</div>
+                                <div style="margin-bottom: 8px;">🚗 Max Distance: 15 miles</div>
+                                <div style="margin-bottom: 8px;">🚶 Walking Distance: 0.5 miles</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Social/Food Courts Page -->
+            <div id="social" class="page">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
+                    <h2>🍽️ My Food Courts</h2>
+                    <button class="btn btn-primary" onclick="createNewCourt()">
+                        ➕ Create New Court
+                    </button>
+                </div>
+
+                <div class="food-court-grid">
+                    <div class="food-court-card" onclick="openFoodCourt('date-night')">
+                        <div class="court-header">
+                            <h3>💕 Date Night Spots</h3>
+                            <p>Romantic restaurants for special occasions</p>
+                        </div>
+                        <div class="court-content">
+                            <div>5 restaurants • Private collection</div>
+                            <div class="court-restaurants">
+                                <span class="mini-restaurant">Golden Dragon</span>
+                                <span class="mini-restaurant">Bella Vista</span>
+                                <span class="mini-restaurant">Sakura Garden</span>
+                                <span class="mini-restaurant">+2 more</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="food-court-card" onclick="openFoodCourt('comfort-food')">
+                        <div class="court-header">
+                            <h3>🏠 Comfort Food</h3>
+                            <p>Places that feel like home</p>
+                        </div>
+                        <div class="court-content">
+                            <div>8 restaurants • Shared with 3 friends</div>
+                            <div class="court-restaurants">
+                                <span class="mini-restaurant">Mama Zhou's</span>
+                                <span class="mini-restaurant">Uncle Chen's</span>
+                                <span class="mini-restaurant">Home Kitchen</span>
+                                <span class="mini-restaurant">+5 more</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="food-court-card" onclick="openFoodCourt('fusion-adventures')">
+                        <div class="court-header">
+                            <h3>🌮 Fusion Adventures</h3>
+                            <p>Creative cultural crossovers to try</p>
+                        </div>
+                        <div class="court-content">
+                            <div>12 restaurants • Public collection</div>
+                            <div class="court-restaurants">
+                                <span class="mini-restaurant">Taco Dynasty</span>
+                                <span class="mini-restaurant">Ramen Burger</span>
+                                <span class="mini-restaurant">Pizza Wok</span>
+                                <span class="mini-restaurant">+9 more</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="food-court-card" onclick="openFoodCourt('budget-gems')">
+                        <div class="court-header">
+                            <h3>💎 Budget Gems</h3>
+                            <p>Amazing food that won't break the bank</p>
+                        </div>
+                        <div class="court-content">
+                            <div>15 restaurants • Shared with 7 friends</div>
+                            <div class="court-restaurants">
+                                <span class="mini-restaurant">Lucky Noodles</span>
+                                <span class="mini-restaurant">Street Tacos</span>
+                                <span class="mini-restaurant">Pho Corner</span>
+                                <span class="mini-restaurant">+12 more</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="food-court-card" onclick="openFoodCourt('weekend-brunch')">
+                        <div class="court-header">
+                            <h3>🥞 Weekend Brunch</h3>
+                            <p>Perfect spots for lazy Sunday mornings</p>
+                        </div>
+                        <div class="court-content">
+                            <div>6 restaurants • Private collection</div>
+                            <div class="court-restaurants">
+                                <span class="mini-restaurant">Dim Sum Palace</span>
+                                <span class="mini-restaurant">Pancake House</span>
+                                <span class="mini-restaurant">Café Luna</span>
+                                <span class="mini-restaurant">+3 more</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="food-court-card" onclick="openFoodCourt('family-friendly')">
+                        <div class="court-header">
+                            <h3>👨‍👩‍👧‍👦 Family Friendly</h3>
+                            <p>Great spots for family gatherings</p>
+                        </div>
+                        <div class="court-content">
+                            <div>9 restaurants • Shared with family</div>
+                            <div class="court-restaurants">
+                                <span class="mini-restaurant">Grand Palace</span>
+                                <span class="mini-restaurant">Pizza Garden</span>
+                                <span class="mini-restaurant">Noodle Kingdom</span>
+                                <span class="mini-restaurant">+6 more</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 40px;">
+                    <h3>🌟 Trending Food Courts</h3>
+                    <p style="color: var(--text-light); margin-bottom: 20px;">Discover collections from the FlavorTalks community</p>
+                    
+                    <div class="food-court-grid">
+                        <div class="food-court-card">
+                            <div class="court-header">
+                                <h3>🔥 SF Hidden Gems</h3>
+                                <p>by @foodieexplorer • 45 followers</p>
+                            </div>
+                            <div class="court-content">
+                                <div>20 restaurants • Public collection</div>
+                                <div style="margin-top: 10px; font-size: 14px; color: var(--text-light);">
+                                    "Secret spots locals don't want tourists to find"
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="food-court-card">
+                            <div class="court-header">
+                                <h3>🌶️ Spice Route</h3>
+                                <p>by @spicequeen • 128 followers</p>
+                            </div>
+                            <div class="court-content">
+                                <div>35 restaurants • Public collection</div>
+                                <div style="margin-top: 10px; font-size: 14px; color: var(--text-light);">
+                                    "For those who can handle the heat!"
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cultural Bridge Page -->
+            <div id="cultural" class="page">
+                <div style="text-align: center; margin-bottom: 40px;">
+                    <h1>🌉 Cultural Bridge</h1>
+                    <p style="font-size: 18px; color: var(--text-light); max-width: 600px; margin: 0 auto;">
+                        Discover how different cuisines connect through ingredients, techniques, and flavors. 
+                        Explore the beautiful intersections of culinary traditions.
+                    </p>
+                </div>
+
+                <div style="background: var(--white); padding: 30px; border-radius: 20px; box-shadow: var(--shadow); margin-bottom: 30px;">
+                    <h3 style="margin-bottom: 20px; text-align: center;">🎯 Your Cultural Flavor Profile</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                        <div style="text-align: center; padding: 20px; background: var(--secondary-cream); border-radius: 15px;">
+                            <div style="font-size: 40px; margin-bottom: 10px;">🌶️</div>
+                            <h4>Spice Harmony</h4>
+                            <p style="color: var(--text-light);">Sichuan → Korean → Thai</p>
+                        </div>
+                        <div style="text-align: center; padding: 20px; background: var(--secondary-cream); border-radius: 15px;">
+                            <div style="font-size: 40px; margin-bottom: 10px;">🍜</div>
+                            <h4>Noodle Mastery</h4>
+                            <p style="color: var(--text-light);">Ramen → Pho → Pasta</p>
+                        </div>
+                        <div style="text-align: center; padding: 20px; background: var(--secondary-cream); border-radius: 15px;">
+                            <div style="font-size: 40px; margin-bottom: 10px;">🥟</div>
+                            <h4>Dumpling Wisdom</h4>
+                            <p style="color: var(--text-light);">Jiaozi → Momo → Pierogi</p>
+                        </div>
+                        <div style="text-align: center; padding: 20px; background: var(--secondary-cream); border-radius: 15px;">
+                            <div style="font-size: 40px; margin-bottom: 10px;">🔥</div>
+                            <h4>Wok Techniques</h4>
+                            <p style="color: var(--text-light);">Stir-fry → Teppanyaki → Sauté</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 25px;">
+                    <div style="background: var(--white); padding: 25px; border-radius: 15px; box-shadow: var(--shadow);">
+                        <h4 style="margin-bottom: 15px; color: var(--primary-orange);">🌍 Today's Cultural Connection</h4>
+                        <div style="margin-bottom: 15px;">
+                            <strong>Chinese Five-Spice ↔ Ethiopian Berbere</strong>
+                        </div>
+                        <p style="color: var(--text-light); margin-bottom: 15px;">
+                            Both spice blends share warming spices like cinnamon and cloves, creating similar comfort profiles across continents.
+                        </p>
+                        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                            <span style="background: var(--secondary-cream); padding: 5px 10px; border-radius: 10px; font-size: 12px;">Star Anise</span>
+                            <span style="background: var(--secondary-cream); padding: 5px 10px; border-radius: 10px; font-size: 12px;">Cinnamon</span>
+                            <span style="background: var(--secondary-cream); padding: 5px 10px; border-radius: 10px; font-size: 12px;">Cloves</span>
+                        </div>
+                    </div>
+
+                    <div style="background: var(--white); padding: 25px; border-radius: 15px; box-shadow: var(--shadow);">
+                        <h4 style="margin-bottom: 15px; color: var(--primary-orange);">🥢 Technique Bridge</h4>
+                        <div style="margin-bottom: 15px;">
+                            <strong>Steaming Mastery Across Cultures</strong>
+                        </div>
+                        <p style="color: var(--text-light); margin-bottom: 15px;">
+                            From Chinese dim sum to Moroccan couscous, steaming preserves nutrients and creates delicate textures worldwide.
+                        </p>
+                        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                            <span style="background: var(--secondary-cream); padding: 5px 10px; border-radius: 10px; font-size: 12px;">Bamboo Steamer</span>
+                            <span style="background: var(--secondary-cream); padding: 5px 10px; border-radius: 10px; font-size: 12px;">Couscoussier</span>
+                        </div>
+                    </div>
+
+                    <div style="background: var(--white); padding: 25px; border-radius: 15px; box-shadow: var(--shadow);">
+                        <h4 style="margin-bottom: 15px; color: var(--primary-orange);">🍲 Flavor Harmony</h4>
+                        <div style="margin-bottom: 15px;">
+                            <strong>Umami Across Traditions</strong>
+                        </div>
+                        <p style="color: var(--text-light); margin-bottom: 15px;">
+                            Soy sauce, fish sauce, miso, and aged cheeses all provide that savory depth that makes food irresistible.
+                        </p>
+                        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                            <span style="background: var(--secondary-cream); padding: 5px 10px; border-radius: 10px; font-size: 12px;">Fermented</span>
+                            <span style="background: var(--secondary-cream); padding: 5px 10px; border-radius: 10px; font-size: 12px;">Aged</span>
+                        </div>
+                    </div>
+
+                    <div style="background: var(--white); padding: 25px; border-radius: 15px; box-shadow: var(--shadow);">
+                        <h4 style="margin-bottom: 15px; color: var(--primary-orange);">🌿 Ingredient Journey</h4>
+                        <div style="margin-bottom: 15px;">
+                            <strong>Ginger's Global Adventure</strong>
+                        </div>
+                        <p style="color: var(--text-light); margin-bottom: 15px;">
+                            From Chinese stir-fries to Indian curries to Caribbean rum cake, ginger adds warmth and complexity everywhere.
+                        </p>
+                        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                            <span style="background: var(--secondary-cream); padding: 5px 10px; border-radius: 10px; font-size: 12px;">Anti-inflammatory</span>
+                            <span style="background: var(--secondary-cream); padding: 5px 10px; border-radius: 10px; font-size: 12px;">Warming</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 40px; text-align: center;">
+                    <button class="btn btn-primary" onclick="exploreCulturalBridge()">
+                        🔍 Explore More Connections
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
 
 </body>
 </html>
