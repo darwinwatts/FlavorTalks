@@ -489,3 +489,29 @@ function exploreCulturalBridge() {
 function toggleMobileMenu() {
     app.toggleMobileMenu();
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+  const form = document.getElementById('auth-form');
+  if (form) {
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const email = form.querySelector('input[type="email"]').value;
+      const password = form.querySelector('input[type="password"]').value;
+
+      // Send to backend (adjust URL as needed)
+      const response = await fetch('http://localhost:8000/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+      });
+
+      if (response.ok) {
+        // Success: redirect or show main app
+        alert('Login successful!');
+        // window.location.href = '/main.html'; // or show/hide app sections
+      } else {
+        alert('Login failed. Please check your credentials.');
+      }
+    });
+  }
+});
