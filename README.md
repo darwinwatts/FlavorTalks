@@ -15,6 +15,12 @@ FlavorTalks is a food discovery web app prototype that combines AI-powered conve
 
 ---
 
+## Advanced Features
+
+- 
+
+---
+
 ## Getting Started
 
 ### Prerequisites
@@ -27,5 +33,5 @@ FlavorTalks is a food discovery web app prototype that combines AI-powered conve
 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-username/flavortalks.git
+git clone https://github.com/darwinwatts/flavortalks.git
 cd flavortalks
