@@ -213,8 +213,8 @@ This project is licensed under the MIT License - see the <LICENSE> file for deta
 ## 📞 Contact & Support
 
 - **GitHub Issues**: [Report bugs or request features](https://github.com/darwinwatts/flavor-talks/issues)
-- **Email**: [Your contact email]
-- **Twitter**: [@your_handle]
+- **Email**: [adeolasworks@gmail.com](mailto:adeolasworks@gmail.com)
+- **Twitter**: [@deolatoo](https://twitter.com/deolatoo) 
 
 -----
 
